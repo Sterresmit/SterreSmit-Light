@@ -10,24 +10,32 @@ import UIKit
 
 class ViewController: UIViewController {
     var lightOn = true
-
-    @IBOutlet weak var lightButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-@IBAction func buttonPressed(_ sender: Any) {
-    lightOn = !lightOn
-    updateUI()
-            }
-func updateUI() {
-view.backgroundColor = lightOn ? .white : .black
     }
     
+    // when button is pressed, call functions to change colours
+    @IBAction func buttonPressed(_ sender: Any) {
+        lightOn = !lightOn
+        setNeedsStatusBarAppearanceUpdate()
+        updateUI()
+    }
+    // switch between white and black
+    func updateUI() {
+        view.backgroundColor = lightOn ? .white : .black
+    }
+    // changing colour of the statusbar to make it visible when light is on and off
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if lightOn == true {
+            return UIStatusBarStyle.default
+        } else {
+            return UIStatusBarStyle.lightContent
+        }
+    }
     
+}
 
-        
-    }
 
 
 
